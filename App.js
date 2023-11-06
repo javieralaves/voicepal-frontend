@@ -97,6 +97,7 @@ function AuthenticationView() {
     footerCaption: {
       textAlign: "center",
       color: "#8A8A8E",
+      fontSize: 13,
     },
   });
 
@@ -128,7 +129,7 @@ function AuthenticationView() {
           <View style={styles.captionArea}>
             <Text style={styles.footerCaption}>
               By tapping continue, you accept our Terms and Conditions and
-              Privacy Policy
+              Privacy Policy.
             </Text>
           </View>
         </View>
