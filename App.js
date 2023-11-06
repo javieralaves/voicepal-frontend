@@ -133,6 +133,7 @@ function AuthenticationView() {
           </View>
         </View>
       </SafeAreaView>
+      <StatusBar style="auto" />
     </View>
   );
 }
