@@ -24,7 +24,13 @@ const HomeScreen = ({ navigation }) => {
         <View style={styles.baseContent}>
           <View style={styles.logImage} />
           <View style={styles.logText}>
-            <Text style={styles.logTitle}>The hypothesis behind VoicePal</Text>
+            <Text
+              style={styles.logTitle}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              The hypothesis behind VoicePal
+            </Text>
             <Text style={styles.posted}>Nov 1 • 19:43</Text>
           </View>
         </View>
@@ -109,6 +115,7 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   logText: {
+    flex: 1,
     marginLeft: 12,
     marginTop: 2,
   },
