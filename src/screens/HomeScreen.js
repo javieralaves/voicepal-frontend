@@ -7,11 +7,19 @@ const HomeScreen = ({ navigation }) => {
   // Component state
   const [pressedState, setPressedState] = useState("base");
 
+  // Playing state
+  const [audioState, setAudioState] = useState(false);
+
   // Function to toggle pressed state
   const togglePressed = () => {
     setPressedState((prevState) =>
       prevState === "base" ? "expanded" : "base"
     );
+  };
+
+  // Function to toggle audio state
+  const playButtonPressed = () => {
+    setAudioState(!audioState);
   };
 
   return (
@@ -60,8 +68,15 @@ const HomeScreen = ({ navigation }) => {
                   color="#8a8a8e"
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{ padding: 8 }}>
-                <MaterialCommunityIcons name="play" size={32} color="black" />
+              <TouchableOpacity
+                style={{ padding: 8 }}
+                onPress={playButtonPressed}
+              >
+                <MaterialCommunityIcons
+                  name={audioState ? "pause" : "play"}
+                  size={32}
+                  color="black"
+                />
               </TouchableOpacity>
               <TouchableOpacity style={{ padding: 8 }}>
                 <MaterialCommunityIcons
