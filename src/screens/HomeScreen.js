@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 
 const HomeScreen = ({ navigation }) => {
   // Component state
@@ -20,6 +20,28 @@ const HomeScreen = ({ navigation }) => {
   // Function to toggle audio state
   const playButtonPressed = () => {
     setAudioState(!audioState);
+  };
+
+  const { showActionSheetWithOptions } = useActionSheet();
+
+  const openMenu = () => {
+    const options = ["Edit Note", "Delete Note", "Cancel"];
+    const cancelButtonIndex = 2;
+
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      (buttonIndex) => {
+        if (buttonIndex === 0) {
+          // handle Option 1
+        } else if (buttonIndex === 1) {
+          // handle Option 2
+        }
+        // Cancel does nothing
+      }
+    );
   };
 
   return (
@@ -85,7 +107,7 @@ const HomeScreen = ({ navigation }) => {
                   color="#8a8a8e"
                 />
               </TouchableOpacity>
-              <TouchableOpacity style={{ padding: 8 }}>
+              <TouchableOpacity style={{ padding: 8 }} onPress={openMenu}>
                 <MaterialCommunityIcons
                   name="dots-horizontal-circle-outline"
                   size={24}
