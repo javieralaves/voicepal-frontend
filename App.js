@@ -10,6 +10,9 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
+import { ActionSheetProvider } from "@expo/react-native-action-sheet";
+
 import HomeScreen from "./src/screens/HomeScreen";
 
 // authentication view
@@ -152,20 +155,22 @@ const Stack = createNativeStackNavigator();
 // main app
 function App() {
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen
-          name="Authentication"
-          component={AuthenticationView}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="HomeScreen"
-          component={HomeScreen}
-          options={{ headerShown: true }} // you can set headerShown to true if you want a header
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <ActionSheetProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Authentication"
+            component={AuthenticationView}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="HomeScreen"
+            component={HomeScreen}
+            options={{ headerShown: true }} // you can set headerShown to true if you want a header
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </ActionSheetProvider>
   );
 }
 
