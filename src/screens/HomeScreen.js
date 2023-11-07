@@ -36,9 +36,14 @@ const HomeScreen = ({ navigation }) => {
         </View>
         {pressedState === "expanded" && (
           <View style={styles.expandedContent}>
-            {/* Add your additional content here */}
-            <View>
-              <View style={styles.progressBar} />
+            <View style={styles.progressBarArea}>
+              <View style={styles.progressBar}>
+                <View style={styles.progressBarKnob} />
+              </View>
+              <View style={styles.progressTiming}>
+                <Text style={styles.timeText}>0:00</Text>
+                <Text style={styles.timeText}>3:00</Text>
+              </View>
             </View>
             <View style={styles.controls}>
               <TouchableOpacity style={{ padding: 8 }}>
@@ -137,11 +142,31 @@ const styles = StyleSheet.create({
     marginTop: 16,
     width: "100%",
   },
+  progressBarArea: {
+    width: "100%",
+  },
   progressBar: {
     width: "100%",
     height: 3,
     backgroundColor: "rgba(0, 0, 0, 0.08)",
     borderRadius: 10,
+    justifyContent: "center",
+  },
+  progressBarKnob: {
+    width: 8,
+    height: 8,
+    borderRadius: 30,
+    backgroundColor: "black",
+  },
+  progressTiming: {
+    flexDirection: "row",
+    width: "100%",
+    justifyContent: "space-between",
+    marginTop: 8,
+  },
+  timeText: {
+    color: "#8a8a8e",
+    fontSize: 13,
   },
   controls: {
     flexDirection: "row",
