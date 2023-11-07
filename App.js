@@ -10,9 +10,10 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import HomeScreen from "./src/screens/HomeScreen";
 
 // authentication view
-function AuthenticationView() {
+function AuthenticationView({ navigation }) {
   // stylesheet for view
   const styles = StyleSheet.create({
     screen: {
@@ -112,14 +113,20 @@ function AuthenticationView() {
           </Text>
         </View>
         <View style={styles.footer}>
-          <TouchableOpacity style={styles.appleButton}>
+          <TouchableOpacity
+            style={styles.appleButton}
+            onPress={() => navigation.navigate("HomeScreen")}
+          >
             <Image
               source={require("./assets/apple-logo.png")}
               style={styles.socialLogo}
             />
             <Text style={styles.appleButtonText}>Continue with Apple</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.googleButton}>
+          <TouchableOpacity
+            style={styles.googleButton}
+            onPress={() => navigation.navigate("HomeScreen")}
+          >
             <Image
               source={require("./assets/google-logo.png")}
               style={styles.socialLogo}
@@ -151,6 +158,11 @@ function App() {
           name="Authentication"
           component={AuthenticationView}
           options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="HomeScreen"
+          component={HomeScreen}
+          options={{ headerShown: true }} // you can set headerShown to true if you want a header
         />
       </Stack.Navigator>
     </NavigationContainer>
