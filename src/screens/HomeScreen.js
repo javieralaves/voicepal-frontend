@@ -52,7 +52,13 @@ const HomeScreen = ({ navigation }) => {
         activeOpacity={0.7}
       >
         <View style={styles.baseContent}>
-          <View style={styles.logImage} />
+          <View style={styles.logImage}>
+            <MaterialCommunityIcons
+              name="thought-bubble"
+              size={24}
+              color="#8a8a8e"
+            />
+          </View>
           <View style={styles.logText}>
             <Text
               style={styles.logTitle}
@@ -151,10 +157,12 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logImage: {
-    backgroundColor: "black",
+    backgroundColor: "#F7F7F9",
     width: 48,
     height: 48,
     borderRadius: 8,
+    justifyContent: "center",
+    alignItems: "center",
   },
   logText: {
     flex: 1,
