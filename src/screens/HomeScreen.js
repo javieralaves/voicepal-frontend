@@ -1,14 +1,34 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  ActivityIndicator,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 
 const HomeScreen = ({ navigation }) => {
-  // Component state
+  // Processing state
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  // Press state
   const [pressedState, setPressedState] = useState("base");
 
   // Playing state
   const [audioState, setAudioState] = useState(false);
+
+  // Function that handles processing
+  const startProcessing = () => {
+    setIsProcessing(true);
+    // Fetch data and other async functions here?
+  };
+
+  // Call this function when the processing is done
+  const endProcessing = () => {
+    setIsProcessing(false);
+  };
 
   // Function to toggle pressed state
   const togglePressed = () => {
@@ -47,10 +67,16 @@ const HomeScreen = ({ navigation }) => {
   return (
     <View style={styles.screen}>
       <TouchableOpacity
-        style={styles.logContainer}
-        onPress={togglePressed}
-        activeOpacity={0.7}
+        style={[styles.logContainer, isProcessing && styles.processing]}
+        onPress={isProcessing ? null : togglePressed}
+        activeOpacity={isProcessing ? 1 : 0.7}
       >
+        {/* If processing, show an indicator */}
+        {isProcessing && (
+          <View style={styles.processingOverlay}>
+            <ActivityIndicator size="large" />
+          </View>
+        )}
         <View style={styles.baseContent}>
           <View style={styles.logImage}>
             <MaterialCommunityIcons
@@ -150,6 +176,15 @@ const styles = StyleSheet.create({
     shadowRadius: 12,
     elevation: 12,
     shadowOpacity: 1,
+  },
+  processing: {
+    opacity: 0.5,
+  },
+  processingOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
   },
   baseContent: {
     width: "100%",
