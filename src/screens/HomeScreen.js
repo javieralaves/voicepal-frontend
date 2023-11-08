@@ -95,6 +95,13 @@ const HomeScreen = ({ navigation }) => {
             </Text>
             <Text style={styles.posted}>Nov 1 • 19:43</Text>
           </View>
+          {pressedState === "expanded" && (
+            <MaterialCommunityIcons
+              name="chevron-right"
+              size={24}
+              color="#8a8a8e"
+            />
+          )}
         </View>
         {pressedState === "expanded" && (
           <View style={styles.expandedContent}>
