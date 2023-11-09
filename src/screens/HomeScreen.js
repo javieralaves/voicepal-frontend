@@ -8,11 +8,14 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
-import Log from "./Log";
+import HomeEmptyState from "../components/HomeEmptyState";
 
 const HomeScreen = ({ navigation }) => {
   // Processing state
   const [isProcessing, setIsProcessing] = useState(false);
+
+  // Dummy variable for number of logs available in screen to render empty state
+  const audioLogs = 0;
 
   // Press state
   const [pressedState, setPressedState] = useState("base");
@@ -67,105 +70,109 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.screen}>
-      <TouchableOpacity
-        style={[styles.logContainer, isProcessing && styles.processing]}
-        onPress={() => {
-          if (!isProcessing) {
-            if (pressedState === "expanded") {
-              navigation.navigate("Log");
-            } else {
-              togglePressed();
+      {audioLogs === 0 ? (
+        <HomeEmptyState />
+      ) : (
+        <TouchableOpacity
+          style={[styles.logContainer, isProcessing && styles.processing]}
+          onPress={() => {
+            if (!isProcessing) {
+              if (pressedState === "expanded") {
+                navigation.navigate("Log");
+              } else {
+                togglePressed();
+              }
             }
-          }
-        }}
-        activeOpacity={isProcessing ? 1 : 0.7}
-      >
-        {/* If processing, show an indicator */}
-        {isProcessing && (
-          <View style={styles.processingOverlay}>
-            <ActivityIndicator size="large" />
-          </View>
-        )}
-        <View style={styles.baseContent}>
-          <View style={styles.logImage}>
-            <MaterialCommunityIcons
-              name="thought-bubble"
-              size={24}
-              color="#8a8a8e"
-            />
-          </View>
-          <View style={styles.logText}>
-            <Text
-              style={styles.logTitle}
-              numberOfLines={1}
-              ellipsizeMode="tail"
-            >
-              The hypothesis behind VoicePal
-            </Text>
-            <Text style={styles.posted}>Nov 1 • 19:43</Text>
+          }}
+          activeOpacity={isProcessing ? 1 : 0.7}
+        >
+          {/* If processing, show an indicator */}
+          {isProcessing && (
+            <View style={styles.processingOverlay}>
+              <ActivityIndicator size="large" />
+            </View>
+          )}
+          <View style={styles.baseContent}>
+            <View style={styles.logImage}>
+              <MaterialCommunityIcons
+                name="thought-bubble"
+                size={24}
+                color="#8a8a8e"
+              />
+            </View>
+            <View style={styles.logText}>
+              <Text
+                style={styles.logTitle}
+                numberOfLines={1}
+                ellipsizeMode="tail"
+              >
+                The hypothesis behind VoicePal
+              </Text>
+              <Text style={styles.posted}>Nov 1 • 19:43</Text>
+            </View>
+            {pressedState === "expanded" && (
+              <MaterialCommunityIcons
+                name="chevron-right"
+                size={24}
+                color="#8a8a8e"
+              />
+            )}
           </View>
           {pressedState === "expanded" && (
-            <MaterialCommunityIcons
-              name="chevron-right"
-              size={24}
-              color="#8a8a8e"
-            />
+            <View style={styles.expandedContent}>
+              <View style={styles.progressBarArea}>
+                <View style={styles.progressBar}>
+                  <View style={styles.progressBarKnob} />
+                </View>
+                <View style={styles.progressTiming}>
+                  <Text style={styles.timeText}>0:00</Text>
+                  <Text style={styles.timeText}>3:00</Text>
+                </View>
+              </View>
+              <View style={styles.controls}>
+                <TouchableOpacity style={{ padding: 8 }}>
+                  <MaterialCommunityIcons
+                    name="sticker-text-outline"
+                    size={24}
+                    color="#8a8a8e"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ padding: 8 }}>
+                  <MaterialCommunityIcons
+                    name="rewind-15"
+                    size={24}
+                    color="#8a8a8e"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{ padding: 8 }}
+                  onPress={playButtonPressed}
+                >
+                  <MaterialCommunityIcons
+                    name={audioState ? "pause" : "play"}
+                    size={32}
+                    color="black"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ padding: 8 }}>
+                  <MaterialCommunityIcons
+                    name="fast-forward-15"
+                    size={24}
+                    color="#8a8a8e"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity style={{ padding: 8 }} onPress={openMenu}>
+                  <MaterialCommunityIcons
+                    name="dots-horizontal-circle-outline"
+                    size={24}
+                    color="#8a8a8e"
+                  />
+                </TouchableOpacity>
+              </View>
+            </View>
           )}
-        </View>
-        {pressedState === "expanded" && (
-          <View style={styles.expandedContent}>
-            <View style={styles.progressBarArea}>
-              <View style={styles.progressBar}>
-                <View style={styles.progressBarKnob} />
-              </View>
-              <View style={styles.progressTiming}>
-                <Text style={styles.timeText}>0:00</Text>
-                <Text style={styles.timeText}>3:00</Text>
-              </View>
-            </View>
-            <View style={styles.controls}>
-              <TouchableOpacity style={{ padding: 8 }}>
-                <MaterialCommunityIcons
-                  name="sticker-text-outline"
-                  size={24}
-                  color="#8a8a8e"
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={{ padding: 8 }}>
-                <MaterialCommunityIcons
-                  name="rewind-15"
-                  size={24}
-                  color="#8a8a8e"
-                />
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={{ padding: 8 }}
-                onPress={playButtonPressed}
-              >
-                <MaterialCommunityIcons
-                  name={audioState ? "pause" : "play"}
-                  size={32}
-                  color="black"
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={{ padding: 8 }}>
-                <MaterialCommunityIcons
-                  name="fast-forward-15"
-                  size={24}
-                  color="#8a8a8e"
-                />
-              </TouchableOpacity>
-              <TouchableOpacity style={{ padding: 8 }} onPress={openMenu}>
-                <MaterialCommunityIcons
-                  name="dots-horizontal-circle-outline"
-                  size={24}
-                  color="#8a8a8e"
-                />
-              </TouchableOpacity>
-            </View>
-          </View>
-        )}
-      </TouchableOpacity>
+        </TouchableOpacity>
+      )}
     </View>
   );
 };
