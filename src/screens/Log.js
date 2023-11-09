@@ -51,7 +51,7 @@ export default function Log({ navigation }) {
         <View style={styles.iconRow}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <MaterialCommunityIcons
-              name="arrow-left"
+              name="chevron-down"
               size={24}
               color="#8a8a8e"
             />
