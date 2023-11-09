@@ -46,7 +46,7 @@ export default function Log({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["right", "bottom", "left"]}>
+    <SafeAreaView style={styles.safeArea} edges={["right", "left"]}>
       <ScrollView style={styles.container}>
         <View style={styles.iconRow}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -79,7 +79,6 @@ export default function Log({ navigation }) {
         <Image
           style={styles.image}
           source={require("../../assets/log-image.png")}
-          // Replace 'your-image-url' with the path to your local asset or remote URL
         />
         <View style={styles.logInfo}>
           <Text style={styles.logTitle}>The hypothesis behind VoicePal</Text>
@@ -152,7 +151,7 @@ export default function Log({ navigation }) {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F7F7F9", // Or any other background color you're using for your app
+    backgroundColor: "#FFF",
   },
   container: {
     flex: 1,
@@ -176,12 +175,10 @@ const styles = StyleSheet.create({
   },
   logInfo: {
     padding: 16,
-    // Include styles for your log info area
   },
   logTitle: {
     fontWeight: "bold",
     fontSize: 22,
-    // include additional styling for the title
   },
   posted: {
     color: "grey",
@@ -232,17 +229,15 @@ const styles = StyleSheet.create({
   },
   summaryArea: {
     padding: 16,
-    // Include styles for your summary text area
   },
   summaryText: {
-    // Include text styles for your summary
+    // Include text styles for summary
   },
   transcriptionArea: {
     padding: 16,
-    // Include styles for your transcription text area
+    // Include styles for transcription text area
   },
   transcriptionText: {
-    // Include text styles for your transcription
+    // Include text styles for transcription
   },
-  // ... Add styles for progress bar and audio controls as per your design
 });
