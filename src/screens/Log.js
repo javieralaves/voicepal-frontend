@@ -3,9 +3,11 @@ import {
   Dimensions,
   ScrollView,
   View,
+  Platform,
   Text,
   Image,
   TouchableOpacity,
+  StatusBar,
   StyleSheet,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -51,7 +53,7 @@ export default function Log({ navigation }) {
         <View style={styles.iconRow}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <MaterialCommunityIcons
-              name="chevron-down"
+              name={Platform.OS === "android" ? "arrow-left" : "chevron-down"}
               size={24}
               color="#8a8a8e"
             />
@@ -155,6 +157,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
+    marginTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
   },
   iconRow: {
     flexDirection: "row",
