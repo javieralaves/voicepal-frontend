@@ -1,4 +1,7 @@
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import {
+  createNativeStackNavigator,
+  CardStyleInterpolators,
+} from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import * as React from "react";
 import { StatusBar } from "expo-status-bar";
@@ -172,7 +175,11 @@ function App() {
           <Stack.Screen
             name="Log"
             component={Log}
-            options={{ headerShown: false }}
+            options={{
+              presentation: "modal",
+              headerShown: false,
+              contentStyle: { backgroundColor: "transparent" }, // To ensure no additional styles are interfering
+            }}
           />
         </Stack.Navigator>
       </NavigationContainer>

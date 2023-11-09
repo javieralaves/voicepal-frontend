@@ -46,7 +46,7 @@ export default function Log({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea} edges={["top"]}>
+    <SafeAreaView style={styles.safeArea} edges={["right", "bottom", "left"]}>
       <ScrollView style={styles.container}>
         <View style={styles.iconRow}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
