@@ -174,7 +174,7 @@ const styles = StyleSheet.create({
     height: Dimensions.get("window").width * (5 / 4),
   },
   logInfo: {
-    padding: 16,
+    padding: 20,
   },
   logTitle: {
     fontWeight: "bold",
@@ -185,7 +185,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   mediaPlayer: {
-    padding: 16,
+    padding: 20,
   },
   progressBarArea: {
     width: "100%",
@@ -211,7 +211,7 @@ const styles = StyleSheet.create({
   },
   timeText: {
     color: "#8a8a8e",
-    fontSize: 13,
+    fontSize: 14,
   },
   controls: {
     flexDirection: "row",
@@ -228,14 +228,14 @@ const styles = StyleSheet.create({
     marginBottom: 12,
   },
   summaryArea: {
-    padding: 16,
+    padding: 20,
   },
   summaryText: {
     // Include text styles for summary
   },
   transcriptionArea: {
-    padding: 16,
-    // Include styles for transcription text area
+    padding: 20,
+    paddingBottom: 64,
   },
   transcriptionText: {
     // Include text styles for transcription
