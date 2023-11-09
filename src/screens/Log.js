@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Dimensions,
   ScrollView,
   View,
   Text,
@@ -171,7 +172,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: "100%",
-    height: 512, // you mentioned 512px, but you'll need to adjust this for different screen sizes and ratios
+    height: Dimensions.get("window").width * (5 / 4),
   },
   logInfo: {
     padding: 16,
