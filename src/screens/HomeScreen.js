@@ -94,8 +94,17 @@ const HomeScreen = ({ navigation }) => {
     );
   };
 
+  // Handle navigation to profile
+  const goToProfile = () => {
+    navigation.navigate("Profile");
+  };
+
   return (
     <View style={styles.screen}>
+      <TouchableOpacity onPress={goToProfile} style={styles.profileButton}>
+        <Text>Profile</Text>
+      </TouchableOpacity>
+
       {audioLogs === 0 ? (
         <HomeEmptyState />
       ) : (
@@ -207,7 +216,7 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: "#F7F7F9",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     alignItems: "center",
     padding: 20,
   },
@@ -304,6 +313,14 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 8,
+  },
+  profileButton: {
+    width: "100%",
+    padding: 10,
+    alignItems: "center",
+    marginVertical: 5,
+    borderRadius: 5,
+    backgroundColor: "#E0E0E0",
   },
 });
 

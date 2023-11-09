@@ -19,6 +19,7 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 import HomeScreen from "./src/screens/HomeScreen";
 import Log from "./src/screens/Log";
+import ProfileScreen from "./src/screens/ProfileScreen";
 
 // authentication view
 function AuthenticationView({ navigation }) {
@@ -181,6 +182,11 @@ function App() {
               headerShown: false,
               contentStyle: { backgroundColor: "transparent" }, // To ensure no additional styles are interfering
             }}
+          />
+          <Stack.Screen
+            name="Profile"
+            component={ProfileScreen}
+            options={{ headerShown: true }}
           />
         </Stack.Navigator>
       </NavigationContainer>
