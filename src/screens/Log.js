@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   ScrollView,
   View,
@@ -8,10 +8,42 @@ import {
   StyleSheet,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { useActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 
 export default function Log({ navigation }) {
+  // Playing state
+  const [audioState, setAudioState] = useState(false);
+
+  // Function to toggle audio state
+  const playButtonPressed = () => {
+    setAudioState(!audioState);
+  };
+
+  // Action Sheet setup
+  const { showActionSheetWithOptions } = useActionSheet();
+
+  const openMenu = () => {
+    const options = ["Edit Note", "Delete Note", "Cancel"];
+    const cancelButtonIndex = 2;
+
+    showActionSheetWithOptions(
+      {
+        options,
+        cancelButtonIndex,
+      },
+      (buttonIndex) => {
+        if (buttonIndex === 0) {
+          // handle Option 1
+        } else if (buttonIndex === 1) {
+          // handle Option 2
+        }
+        // Cancel does nothing
+      }
+    );
+  };
+
   return (
     <SafeAreaView style={styles.safeArea} edges={["top"]}>
       <ScrollView style={styles.container}>
@@ -32,9 +64,7 @@ export default function Log({ navigation }) {
               <Feather name="share" size={24} color="#8a8a8e" />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => {
-                /* open action sheet */
-              }}
+              onPress={openMenu}
               style={styles.actionSheetButton}
             >
               <MaterialCommunityIcons
@@ -81,11 +111,10 @@ export default function Log({ navigation }) {
             </TouchableOpacity>
             <TouchableOpacity
               style={{ padding: 8 }}
-              // onPress={playButtonPressed}
+              onPress={playButtonPressed}
             >
               <MaterialCommunityIcons
-                // name={audioState ? "pause" : "play"}
-                name="play"
+                name={audioState ? "pause" : "play"}
                 size={32}
                 color="black"
               />
@@ -97,10 +126,7 @@ export default function Log({ navigation }) {
                 color="#8a8a8e"
               />
             </TouchableOpacity>
-            <TouchableOpacity
-              style={{ padding: 8 }}
-              onPress={console.log("open menu")}
-            >
+            <TouchableOpacity style={{ padding: 8 }} onPress={openMenu}>
               <MaterialCommunityIcons
                 name="dots-horizontal-circle-outline"
                 size={24}
