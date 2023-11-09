@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useActionSheet } from "@expo/react-native-action-sheet";
+import Log from "./Log";
 
 const HomeScreen = ({ navigation }) => {
   // Processing state
@@ -68,7 +69,15 @@ const HomeScreen = ({ navigation }) => {
     <View style={styles.screen}>
       <TouchableOpacity
         style={[styles.logContainer, isProcessing && styles.processing]}
-        onPress={isProcessing ? null : togglePressed}
+        onPress={() => {
+          if (!isProcessing) {
+            if (pressedState === "expanded") {
+              navigation.navigate("Log");
+            } else {
+              togglePressed();
+            }
+          }
+        }}
         activeOpacity={isProcessing ? 1 : 0.7}
       >
         {/* If processing, show an indicator */}

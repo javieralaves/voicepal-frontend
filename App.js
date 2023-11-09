@@ -14,6 +14,7 @@ import {
 import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 
 import HomeScreen from "./src/screens/HomeScreen";
+import Log from "./src/screens/Log";
 
 // authentication view
 function AuthenticationView({ navigation }) {
@@ -166,7 +167,12 @@ function App() {
           <Stack.Screen
             name="HomeScreen"
             component={HomeScreen}
-            options={{ headerShown: true }} // you can set headerShown to true if you want a header
+            options={{ headerShown: true }}
+          />
+          <Stack.Screen
+            name="Log"
+            component={Log}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
