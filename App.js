@@ -7,6 +7,7 @@ import * as React from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   Image,
+  Platform,
   SafeAreaView,
   StyleSheet,
   Text,
@@ -176,7 +177,7 @@ function App() {
             name="Log"
             component={Log}
             options={{
-              presentation: "modal",
+              presentation: Platform.OS === "ios" ? "modal" : undefined,
               headerShown: false,
               contentStyle: { backgroundColor: "transparent" }, // To ensure no additional styles are interfering
             }}
