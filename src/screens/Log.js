@@ -110,9 +110,11 @@ export default function Log({ navigation }) {
           </View>
         </View>
         <View style={styles.summaryArea}>
+          <Text style={styles.sectionTitle}>Summary</Text>
           <Text style={styles.summaryText}>Audio Summary Here</Text>
         </View>
         <View style={styles.transcriptionArea}>
+          <Text style={styles.sectionTitle}>Transcript</Text>
           <Text style={styles.transcriptionText}>Transcription Here</Text>
         </View>
       </ScrollView>
@@ -194,6 +196,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     paddingHorizontal: 8,
+  },
+  sectionTitle: {
+    fontWeight: "bold",
+    fontSize: 16,
+    color: "#000",
+    marginBottom: 12,
   },
   summaryArea: {
     padding: 16,
