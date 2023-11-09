@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
   ActivityIndicator,
+  Alert,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -15,7 +16,7 @@ const HomeScreen = ({ navigation }) => {
   const [isProcessing, setIsProcessing] = useState(false);
 
   // Dummy variable for number of logs available in screen to render empty state
-  const audioLogs = 0;
+  const audioLogs = 1;
 
   // Press state
   const [pressedState, setPressedState] = useState("base");
@@ -59,12 +60,37 @@ const HomeScreen = ({ navigation }) => {
       },
       (buttonIndex) => {
         if (buttonIndex === 0) {
-          // handle Option 1
+          // handle Edit Note
         } else if (buttonIndex === 1) {
-          // handle Option 2
+          // handle Delete Note
+          confirmDelete();
         }
         // Cancel does nothing
       }
+    );
+  };
+
+  // Alert to confirm log deletion upon request
+  const confirmDelete = () => {
+    Alert.alert(
+      "Delete Note", // Alert Title
+      "Are you sure you want to delete this note? This action cannot be undone.", // Alert Message
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel",
+        },
+        {
+          text: "Confirm",
+          onPress: () => {
+            // Put the delete logic here
+            console.log("Delete Pressed");
+          },
+          style: "destructive", // This gives the delete button a red color (iOS only)
+        },
+      ],
+      { cancelable: false } // This prevents the alert from being dismissed by tapping outside of the alert box
     );
   };
 
