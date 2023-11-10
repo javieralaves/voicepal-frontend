@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     padding: 20,
-    backgroundColor: "white",
+    backgroundColor: "#F7F7F9",
   },
   profilePicture: {
     width: 150,
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: "left",
     marginVertical: 5,
     borderRadius: 5,
-    backgroundColor: "#F7F7F9",
+    backgroundColor: "white",
   },
   deactivateText: {
     color: "red",
