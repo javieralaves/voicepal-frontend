@@ -295,6 +295,7 @@ const styles = StyleSheet.create({
   },
   copiedText: {
     marginLeft: 4,
+    color: "#5E5CE6",
   },
   sectionTitle: {
     fontWeight: "600",
