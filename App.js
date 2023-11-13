@@ -20,6 +20,7 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import HomeScreen from "./src/screens/HomeScreen";
 import Log from "./src/screens/Log";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import BottomTabNavigator from "./src/components/BottomTabNavigator";
 
 // authentication view
 function AuthenticationView({ navigation }) {
@@ -124,7 +125,7 @@ function AuthenticationView({ navigation }) {
         <View style={styles.footer}>
           <TouchableOpacity
             style={styles.appleButton}
-            onPress={() => navigation.navigate("HomeScreen")}
+            onPress={() => navigation.navigate("Main")}
           >
             <Image
               source={require("./assets/apple-logo.png")}
@@ -134,7 +135,7 @@ function AuthenticationView({ navigation }) {
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.googleButton}
-            onPress={() => navigation.navigate("HomeScreen")}
+            onPress={() => navigation.navigate("Main")}
           >
             <Image
               source={require("./assets/google-logo.png")}
@@ -170,23 +171,9 @@ function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="HomeScreen"
-            component={HomeScreen}
-            options={{ headerShown: true }}
-          />
-          <Stack.Screen
-            name="Log"
-            component={Log}
-            options={{
-              presentation: Platform.OS === "ios" ? "modal" : undefined,
-              headerShown: false,
-              contentStyle: { backgroundColor: "transparent" }, // To ensure no additional styles are interfering
-            }}
-          />
-          <Stack.Screen
-            name="Profile"
-            component={ProfileScreen}
-            options={{ headerShown: true }}
+            name="Main"
+            component={BottomTabNavigator}
+            options={{ headerShown: false }}
           />
         </Stack.Navigator>
       </NavigationContainer>
