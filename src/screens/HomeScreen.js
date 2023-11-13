@@ -101,9 +101,9 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <View style={styles.screen}>
-      <TouchableOpacity onPress={goToProfile} style={styles.profileButton}>
+      {/* <TouchableOpacity onPress={goToProfile} style={styles.profileButton}>
         <Text>Profile</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
 
       {audioLogs === 0 ? (
         <HomeEmptyState />
