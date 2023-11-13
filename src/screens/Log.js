@@ -20,6 +20,10 @@ export default function Log({ navigation }) {
   // Playing state
   const [audioState, setAudioState] = useState(false);
 
+  // Copy to clipboard states
+  const [isSummaryCopied, setIsSummaryCopied] = useState(false);
+  const [isTranscriptCopied, setIsTranscriptCopied] = useState(false);
+
   // Share toast state
   const [isToastVisible, setToastVisible] = useState(false);
 
@@ -31,6 +35,20 @@ export default function Log({ navigation }) {
   // Function to toggle audio state
   const playButtonPressed = () => {
     setAudioState(!audioState);
+  };
+
+  // Copy to clipboard functions
+
+  const copySummaryToClipboard = async () => {
+    await Clipboard.setStringAsync(summary);
+    setIsSummaryCopied(true);
+    setTimeout(() => setIsSummaryCopied(false), 3000); // Reset after 3 seconds
+  };
+
+  const copyTranscriptToClipboard = async () => {
+    await Clipboard.setStringAsync(transcript);
+    setIsTranscriptCopied(true);
+    setTimeout(() => setIsTranscriptCopied(false), 3000); // Reset after 3 seconds
   };
 
   // Action Sheet setup
@@ -148,46 +166,36 @@ export default function Log({ navigation }) {
           </View>
         </View>
         <View style={styles.summaryArea}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
+          <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Summary</Text>
-            <TouchableOpacity
-              onPress={() => Clipboard.setStringAsync(summary)}
-              style={{ marginLeft: 8 }}
-            >
-              <MaterialCommunityIcons
-                name="content-copy"
-                size={20}
-                color="#8a8a8e"
-              />
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={copySummaryToClipboard}>
+                <MaterialCommunityIcons
+                  name={isSummaryCopied ? "check" : "content-copy"}
+                  size={20}
+                  color="#8a8a8e"
+                />
+              </TouchableOpacity>
+              {isSummaryCopied && <Text style={styles.copiedText}>Copied</Text>}
+            </View>
           </View>
           <Text style={styles.summaryText}>{summary}</Text>
         </View>
         <View style={styles.transcriptionArea}>
-          <View
-            style={{
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
+          <View style={styles.sectionContainer}>
             <Text style={styles.sectionTitle}>Transcript</Text>
-            <TouchableOpacity
-              onPress={() => Clipboard.setStringAsync(transcript)}
-              style={{ marginLeft: 8 }}
-            >
-              <MaterialCommunityIcons
-                name="content-copy"
-                size={20}
-                color="#8a8a8e"
-              />
-            </TouchableOpacity>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={copyTranscriptToClipboard}>
+                <MaterialCommunityIcons
+                  name={isTranscriptCopied ? "check" : "content-copy"}
+                  size={20}
+                  color="#8a8a8e"
+                />
+              </TouchableOpacity>
+              {isTranscriptCopied && (
+                <Text style={styles.copiedText}>Copied</Text>
+              )}
+            </View>
           </View>
           <Text style={styles.transcriptionText}>{transcript}</Text>
           {isToastVisible && (
@@ -275,11 +283,25 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 8,
   },
+  sectionContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 4,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  copiedText: {
+    marginLeft: 4,
+  },
   sectionTitle: {
     fontWeight: "600",
     fontSize: 15,
     color: "#000",
-    marginBottom: 8,
+    marginTop: 4,
+    marginBottom: 4,
   },
   summaryArea: {
     padding: 16,
