@@ -14,6 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import * as Clipboard from "expo-clipboard";
 
 export default function Log({ navigation }) {
   // Playing state
@@ -21,6 +22,11 @@ export default function Log({ navigation }) {
 
   // Share toast state
   const [isToastVisible, setToastVisible] = useState(false);
+
+  // Content variables
+  const summary = `Here's some sample text for what an audio summary looks like. Let's have a few lines of summary, like that. So that I can see how thislooks and figure out the styling and truncation. I'm going to need a little more than that, so I should probably keep typing. Anyway, how's your day today? Are you having a good time? What's the weather like?`;
+
+  const transcript = `In our latest audio note, we delve into the core hypothesis behind VoicePal. We believe that in today's fast-paced world, people often have insightful thoughts and ideas while on the move, but they lack an efficient way to capture and revisit these fleeting moments. VoicePal aims to bridge this gap by offering a seamless audio recording experience, coupled with an intuitive interface for organizing and revisiting these thoughts. Our goal is to not only preserve these valuable insights but also to enhance the user's ability to reflect and act upon them, transforming raw thoughts into meaningful actions.`;
 
   // Function to toggle audio state
   const playButtonPressed = () => {
@@ -142,30 +148,48 @@ export default function Log({ navigation }) {
           </View>
         </View>
         <View style={styles.summaryArea}>
-          <Text style={styles.sectionTitle}>Summary</Text>
-          <Text style={styles.summaryText}>
-            Here's some sample text for what an audio summary looks like. Let's
-            have a few lines of summary, like that. So that I can see how this
-            looks and figure out the styling and truncation. I'm going to need a
-            little more than that, so I should probably keep typing. Anyway,
-            how's your day today? Are you having a good time? What's the weather
-            like?
-          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text style={styles.sectionTitle}>Summary</Text>
+            <TouchableOpacity
+              onPress={() => Clipboard.setStringAsync(summary)}
+              style={{ marginLeft: 8 }}
+            >
+              <MaterialCommunityIcons
+                name="content-copy"
+                size={20}
+                color="#8a8a8e"
+              />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.summaryText}>{summary}</Text>
         </View>
         <View style={styles.transcriptionArea}>
-          <Text style={styles.sectionTitle}>Transcript</Text>
-          <Text style={styles.transcriptionText}>
-            In our latest audio note, we delve into the core hypothesis behind
-            VoicePal. We believe that in today's fast-paced world, people often
-            have insightful thoughts and ideas while on the move, but they lack
-            an efficient way to capture and revisit these fleeting moments.
-            VoicePal aims to bridge this gap by offering a seamless audio
-            recording experience, coupled with an intuitive interface for
-            organizing and revisiting these thoughts. Our goal is to not only
-            preserve these valuable insights but also to enhance the user's
-            ability to reflect and act upon them, transforming raw thoughts into
-            meaningful actions.
-          </Text>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <Text style={styles.sectionTitle}>Transcript</Text>
+            <TouchableOpacity
+              onPress={() => Clipboard.setStringAsync(transcript)}
+              style={{ marginLeft: 8 }}
+            >
+              <MaterialCommunityIcons
+                name="content-copy"
+                size={20}
+                color="#8a8a8e"
+              />
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.transcriptionText}>{transcript}</Text>
           {isToastVisible && (
             <View style={styles.toastContainer}>
               <Text style={styles.toastText}>Generating a public link...</Text>
