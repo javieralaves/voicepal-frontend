@@ -14,17 +14,41 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { useActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
+import * as Clipboard from "expo-clipboard";
 
 export default function Log({ navigation }) {
   // Playing state
   const [audioState, setAudioState] = useState(false);
 
+  // Copy to clipboard states
+  const [isSummaryCopied, setIsSummaryCopied] = useState(false);
+  const [isTranscriptCopied, setIsTranscriptCopied] = useState(false);
+
   // Share toast state
   const [isToastVisible, setToastVisible] = useState(false);
+
+  // Content variables
+  const summary = `Here's some sample text for what an audio summary looks like. Let's have a few lines of summary, like that. So that I can see how thislooks and figure out the styling and truncation. I'm going to need a little more than that, so I should probably keep typing. Anyway, how's your day today? Are you having a good time? What's the weather like?`;
+
+  const transcript = `In our latest audio note, we delve into the core hypothesis behind VoicePal. We believe that in today's fast-paced world, people often have insightful thoughts and ideas while on the move, but they lack an efficient way to capture and revisit these fleeting moments. VoicePal aims to bridge this gap by offering a seamless audio recording experience, coupled with an intuitive interface for organizing and revisiting these thoughts. Our goal is to not only preserve these valuable insights but also to enhance the user's ability to reflect and act upon them, transforming raw thoughts into meaningful actions.`;
 
   // Function to toggle audio state
   const playButtonPressed = () => {
     setAudioState(!audioState);
+  };
+
+  // Copy to clipboard functions
+
+  const copySummaryToClipboard = async () => {
+    await Clipboard.setStringAsync(summary);
+    setIsSummaryCopied(true);
+    setTimeout(() => setIsSummaryCopied(false), 3000); // Reset after 3 seconds
+  };
+
+  const copyTranscriptToClipboard = async () => {
+    await Clipboard.setStringAsync(transcript);
+    setIsTranscriptCopied(true);
+    setTimeout(() => setIsTranscriptCopied(false), 3000); // Reset after 3 seconds
   };
 
   // Action Sheet setup
@@ -142,30 +166,38 @@ export default function Log({ navigation }) {
           </View>
         </View>
         <View style={styles.summaryArea}>
-          <Text style={styles.sectionTitle}>Summary</Text>
-          <Text style={styles.summaryText}>
-            Here's some sample text for what an audio summary looks like. Let's
-            have a few lines of summary, like that. So that I can see how this
-            looks and figure out the styling and truncation. I'm going to need a
-            little more than that, so I should probably keep typing. Anyway,
-            how's your day today? Are you having a good time? What's the weather
-            like?
-          </Text>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Summary</Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={copySummaryToClipboard}>
+                <MaterialCommunityIcons
+                  name={isSummaryCopied ? "check" : "content-copy"}
+                  size={20}
+                  color="#8a8a8e"
+                />
+              </TouchableOpacity>
+              {isSummaryCopied && <Text style={styles.copiedText}>Copied</Text>}
+            </View>
+          </View>
+          <Text style={styles.summaryText}>{summary}</Text>
         </View>
         <View style={styles.transcriptionArea}>
-          <Text style={styles.sectionTitle}>Transcript</Text>
-          <Text style={styles.transcriptionText}>
-            In our latest audio note, we delve into the core hypothesis behind
-            VoicePal. We believe that in today's fast-paced world, people often
-            have insightful thoughts and ideas while on the move, but they lack
-            an efficient way to capture and revisit these fleeting moments.
-            VoicePal aims to bridge this gap by offering a seamless audio
-            recording experience, coupled with an intuitive interface for
-            organizing and revisiting these thoughts. Our goal is to not only
-            preserve these valuable insights but also to enhance the user's
-            ability to reflect and act upon them, transforming raw thoughts into
-            meaningful actions.
-          </Text>
+          <View style={styles.sectionContainer}>
+            <Text style={styles.sectionTitle}>Transcript</Text>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={copyTranscriptToClipboard}>
+                <MaterialCommunityIcons
+                  name={isTranscriptCopied ? "check" : "content-copy"}
+                  size={20}
+                  color="#8a8a8e"
+                />
+              </TouchableOpacity>
+              {isTranscriptCopied && (
+                <Text style={styles.copiedText}>Copied</Text>
+              )}
+            </View>
+          </View>
+          <Text style={styles.transcriptionText}>{transcript}</Text>
           {isToastVisible && (
             <View style={styles.toastContainer}>
               <Text style={styles.toastText}>Generating a public link...</Text>
@@ -251,11 +283,26 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 8,
   },
+  sectionContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: 4,
+  },
+  buttonContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  copiedText: {
+    marginLeft: 4,
+    color: "#5E5CE6",
+  },
   sectionTitle: {
     fontWeight: "600",
     fontSize: 15,
     color: "#000",
-    marginBottom: 8,
+    marginTop: 4,
+    marginBottom: 4,
   },
   summaryArea: {
     padding: 16,
