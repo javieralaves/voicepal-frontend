@@ -19,6 +19,9 @@ export default function Log({ navigation }) {
   // Playing state
   const [audioState, setAudioState] = useState(false);
 
+  // Share toast state
+  const [isToastVisible, setToastVisible] = useState(false);
+
   // Function to toggle audio state
   const playButtonPressed = () => {
     setAudioState(!audioState);
@@ -61,7 +64,8 @@ export default function Log({ navigation }) {
           <View style={styles.rightIcons}>
             <TouchableOpacity
               onPress={() => {
-                /* handle share functionality */
+                setToastVisible(true);
+                setTimeout(() => setToastVisible(false), 3000);
               }}
             >
               <Feather name="share" size={24} color="#8a8a8e" />
@@ -162,6 +166,11 @@ export default function Log({ navigation }) {
             ability to reflect and act upon them, transforming raw thoughts into
             meaningful actions.
           </Text>
+          {isToastVisible && (
+            <View style={styles.toastContainer}>
+              <Text style={styles.toastText}>Generating a public link...</Text>
+            </View>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -280,5 +289,19 @@ const styles = StyleSheet.create({
   transcriptionText: {
     fontSize: 15,
     lineHeight: 22,
+  },
+  toastContainer: {
+    position: "absolute",
+    bottom: 16,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+    padding: 12,
+    backgroundColor: "rgba(60,60,60,0.9)",
+    borderRadius: 20,
+    marginHorizontal: 20,
+  },
+  toastText: {
+    color: "white",
   },
 });
