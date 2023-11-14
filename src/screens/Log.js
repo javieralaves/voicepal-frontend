@@ -15,6 +15,7 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
+import ShareLog from "./ShareLog";
 
 export default function Log({ navigation }) {
   // Playing state
