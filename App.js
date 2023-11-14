@@ -20,6 +20,7 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import HomeScreen from "./src/screens/HomeScreen";
 import Log from "./src/screens/Log";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import SettingsScreen from "./src/screens/SettingsScreen";
 import BottomTabNavigator from "./src/components/BottomTabNavigator";
 
 // authentication view
@@ -174,6 +175,11 @@ function App() {
             name="Main"
             component={BottomTabNavigator}
             options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Settings"
+            component={SettingsScreen}
+            options={{ headerShown: true, title: "Settings" }}
           />
         </Stack.Navigator>
       </NavigationContainer>

@@ -49,14 +49,11 @@ const ProfileScreen = ({ navigation }) => {
         style={styles.profilePicture}
       />
       <Text style={styles.name}>{userData.name}</Text>
-      <TouchableOpacity style={styles.button} onPress={sendFeedback}>
-        <Text>Send Feedback</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={logOut}>
-        <Text>Log Out</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={deactivateAccount}>
-        <Text style={styles.deactivateText}>Deactivate Account</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => navigation.navigate("Settings")}
+      >
+        <Text>Settings</Text>
       </TouchableOpacity>
     </View>
   );
@@ -65,14 +62,14 @@ const ProfileScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: "flex-start",
+    alignItems: "flex-start",
     padding: 20,
     backgroundColor: "#F7F7F9",
   },
   profilePicture: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     borderRadius: 75,
     marginBottom: 20,
   },
@@ -88,9 +85,6 @@ const styles = StyleSheet.create({
     marginVertical: 5,
     borderRadius: 5,
     backgroundColor: "white",
-  },
-  deactivateText: {
-    color: "red",
   },
 });
 
