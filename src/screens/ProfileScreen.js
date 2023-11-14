@@ -6,7 +6,10 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  ScrollView,
+  SafeAreaView,
 } from "react-native";
+import LogComponent from "../components/LogComponent";
 
 const ProfileScreen = ({ navigation }) => {
   // Placeholder for user data
@@ -15,82 +18,83 @@ const ProfileScreen = ({ navigation }) => {
     profilePictureUri: require("../../assets/profile-picture.jpeg"),
   };
 
-  // Function to handle sending feedback
-  const sendFeedback = () => {
-    // Logic for sending feedback
-  };
-
-  // Function to handle logging out
-  const logOut = () => {
-    // Logic for logging out
-  };
-
-  // Function to handle deactivating account
-  const deactivateAccount = () => {
-    Alert.alert(
-      "Deactivate Account",
-      "Are you sure you want to deactivate your account?",
-      [
-        { text: "Cancel", style: "cancel" },
-        // If confirmed, call a function to handle the deactivation
-        {
-          text: "Deactivate",
-          onPress: () => console.log("Deactivate account"),
-          style: "destructive",
-        },
-      ]
-    );
-  };
-
   return (
-    <View style={styles.container}>
-      <Image
-        source={userData.profilePictureUri}
-        style={styles.profilePicture}
-      />
-      <Text style={styles.name}>{userData.name}</Text>
-      <TouchableOpacity style={styles.button} onPress={sendFeedback}>
-        <Text>Send Feedback</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={logOut}>
-        <Text>Log Out</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.button} onPress={deactivateAccount}>
-        <Text style={styles.deactivateText}>Deactivate Account</Text>
-      </TouchableOpacity>
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView style={styles.screen}>
+        <Image
+          source={userData.profilePictureUri}
+          style={styles.profilePicture}
+        />
+        <Text style={styles.name}>{userData.name}</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.button, styles.firstButton]}
+            onPress={console.log("Edit profile")}
+          >
+            <Text>Edit profile</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, styles.secondButton]}
+            onPress={() => navigation.navigate("Settings")}
+          >
+            <Text>Settings</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <LogComponent navigation={navigation} style={styles.logSpacing} />
+          <LogComponent navigation={navigation} style={styles.logSpacing} />
+          <LogComponent navigation={navigation} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
     backgroundColor: "#F7F7F9",
   },
+  screen: {
+    flex: 1,
+    padding: 20,
+  },
   profilePicture: {
-    width: 150,
-    height: 150,
+    width: 100,
+    height: 100,
     borderRadius: 75,
-    marginBottom: 20,
+    marginBottom: 16,
   },
   name: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "700",
     marginBottom: 20,
   },
-  button: {
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
     width: "100%",
+    marginBottom: 20,
+  },
+
+  button: {
     padding: 12,
-    alignItems: "left",
+    alignItems: "center",
     marginVertical: 5,
     borderRadius: 5,
     backgroundColor: "white",
   },
-  deactivateText: {
-    color: "red",
+
+  firstButton: {
+    flex: 1,
+    marginRight: 10, // Space between buttons
+  },
+
+  secondButton: {
+    flex: 1,
+  },
+  logSpacing: {
+    marginBottom: 12, // Spacing between logs
   },
 });
 
