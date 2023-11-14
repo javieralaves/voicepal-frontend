@@ -20,6 +20,7 @@ import { ActionSheetProvider } from "@expo/react-native-action-sheet";
 import HomeScreen from "./src/screens/HomeScreen";
 import Log from "./src/screens/Log";
 import ProfileScreen from "./src/screens/ProfileScreen";
+import ShareLog from "./src/screens/ShareLog";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import BottomTabNavigator from "./src/components/BottomTabNavigator";
 
@@ -179,6 +180,15 @@ function App() {
           <Stack.Screen
             name="Log"
             component={Log}
+            options={{
+              headerShown: false,
+              presentation: "modal",
+              cardStyleInterpolator: CardStyleInterpolators,
+            }}
+          />
+          <Stack.Screen
+            name="ShareLog"
+            component={ShareLog}
             options={{
               headerShown: false,
               presentation: "modal",

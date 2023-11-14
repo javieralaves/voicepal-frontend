@@ -82,7 +82,7 @@ export default function Log({ navigation }) {
             />
           </TouchableOpacity>
           <View style={styles.rightIcons}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate("ShareLog")}>
               <Feather name="share" size={24} color="#8a8a8e" />
             </TouchableOpacity>
             <TouchableOpacity
