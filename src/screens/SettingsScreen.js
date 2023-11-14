@@ -1,7 +1,24 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 
 const SettingsScreen = () => {
+  // Function to handle deactivating account
+  const deactivateAccount = () => {
+    Alert.alert(
+      "Deactivate Account",
+      "Are you sure you want to deactivate your account?",
+      [
+        { text: "Cancel", style: "cancel" },
+        // If confirmed, call a function to handle the deactivation
+        {
+          text: "Deactivate",
+          onPress: () => console.log("Deactivate account"),
+          style: "destructive",
+        },
+      ]
+    );
+  };
+
   return (
     <View style={styles.container}>
       <TouchableOpacity
@@ -16,10 +33,7 @@ const SettingsScreen = () => {
       >
         <Text>Log Out</Text>
       </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={console.log("Deactivating account")}
-      >
+      <TouchableOpacity style={styles.button} onPress={deactivateAccount}>
         <Text style={styles.deactivateText}>Deactivate Account</Text>
       </TouchableOpacity>
     </View>
