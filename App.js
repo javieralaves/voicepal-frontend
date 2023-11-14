@@ -192,7 +192,7 @@ function App() {
             options={{
               headerShown: false,
               presentation: "modal",
-              cardStyleInterpolator: CardStyleInterpolators,
+              cardStyle: { justifyContent: "flex-start" },
             }}
           />
           <Stack.Screen
