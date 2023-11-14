@@ -49,12 +49,20 @@ const ProfileScreen = ({ navigation }) => {
         style={styles.profilePicture}
       />
       <Text style={styles.name}>{userData.name}</Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => navigation.navigate("Settings")}
-      >
-        <Text>Settings</Text>
-      </TouchableOpacity>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={[styles.button, styles.firstButton]}
+          onPress={console.log("Edit profile")}
+        >
+          <Text>Edit profile</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, styles.secondButton]}
+          onPress={() => navigation.navigate("Settings")}
+        >
+          <Text>Settings</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -71,20 +79,34 @@ const styles = StyleSheet.create({
     width: 100,
     height: 100,
     borderRadius: 75,
-    marginBottom: 20,
+    marginBottom: 16,
   },
   name: {
-    fontSize: 24,
-    fontWeight: "bold",
+    fontSize: 20,
+    fontWeight: "700",
     marginBottom: 20,
   },
-  button: {
+  buttonContainer: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
     width: "100%",
+  },
+
+  button: {
     padding: 12,
-    alignItems: "left",
+    alignItems: "center",
     marginVertical: 5,
     borderRadius: 5,
     backgroundColor: "white",
+  },
+
+  firstButton: {
+    flex: 1, // This allows the button to expand
+    marginRight: 10, // Space between buttons
+  },
+
+  secondButton: {
+    flex: 1,
   },
 });
 
