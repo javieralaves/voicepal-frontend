@@ -6,7 +6,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Alert,
+  ScrollView,
 } from "react-native";
+import Log from "./Log";
 
 const ProfileScreen = ({ navigation }) => {
   // Placeholder for user data

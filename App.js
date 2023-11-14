@@ -177,6 +177,15 @@ function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="Log"
+            component={Log}
+            options={{
+              headerShown: false,
+              presentation: "modal",
+              cardStyleInterpolator: CardStyleInterpolators,
+            }}
+          />
+          <Stack.Screen
             name="Settings"
             component={SettingsScreen}
             options={{ headerShown: true, title: "Settings" }}
