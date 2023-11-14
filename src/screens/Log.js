@@ -15,7 +15,6 @@ import { useActionSheet } from "@expo/react-native-action-sheet";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import * as Clipboard from "expo-clipboard";
-import ShareLog from "./ShareLog";
 
 export default function Log({ navigation }) {
   // Playing state
@@ -24,9 +23,6 @@ export default function Log({ navigation }) {
   // Copy to clipboard states
   const [isSummaryCopied, setIsSummaryCopied] = useState(false);
   const [isTranscriptCopied, setIsTranscriptCopied] = useState(false);
-
-  // Share toast state
-  const [isToastVisible, setToastVisible] = useState(false);
 
   // Content variables
   const summary = `Here's some sample text for what an audio summary looks like. Let's have a few lines of summary, like that. So that I can see how thislooks and figure out the styling and truncation. I'm going to need a little more than that, so I should probably keep typing. Anyway, how's your day today? Are you having a good time? What's the weather like?`;
@@ -39,7 +35,6 @@ export default function Log({ navigation }) {
   };
 
   // Copy to clipboard functions
-
   const copySummaryToClipboard = async () => {
     await Clipboard.setStringAsync(summary);
     setIsSummaryCopied(true);
@@ -87,12 +82,7 @@ export default function Log({ navigation }) {
             />
           </TouchableOpacity>
           <View style={styles.rightIcons}>
-            <TouchableOpacity
-              onPress={() => {
-                setToastVisible(true);
-                setTimeout(() => setToastVisible(false), 3000);
-              }}
-            >
+            <TouchableOpacity>
               <Feather name="share" size={24} color="#8a8a8e" />
             </TouchableOpacity>
             <TouchableOpacity
@@ -199,11 +189,6 @@ export default function Log({ navigation }) {
             </View>
           </View>
           <Text style={styles.transcriptionText}>{transcript}</Text>
-          {isToastVisible && (
-            <View style={styles.toastContainer}>
-              <Text style={styles.toastText}>Generating a public link...</Text>
-            </View>
-          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -337,19 +322,5 @@ const styles = StyleSheet.create({
   transcriptionText: {
     fontSize: 15,
     lineHeight: 22,
-  },
-  toastContainer: {
-    position: "absolute",
-    bottom: 16,
-    left: 0,
-    right: 0,
-    alignItems: "center",
-    padding: 12,
-    backgroundColor: "rgba(60,60,60,0.9)",
-    borderRadius: 20,
-    marginHorizontal: 20,
-  },
-  toastText: {
-    color: "white",
   },
 });
