@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   ActivityIndicator,
   Alert,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -15,7 +16,7 @@ const audioLogs = 3;
 
 const HomeScreen = ({ navigation }) => {
   return (
-    <View style={styles.screen}>
+    <ScrollView style={styles.screen}>
       {audioLogs === 0 ? (
         <HomeEmptyState />
       ) : (
@@ -25,7 +26,7 @@ const HomeScreen = ({ navigation }) => {
           <LogComponent navigation={navigation} />
         </>
       )}
-    </View>
+    </ScrollView>
   );
 };
 
@@ -33,8 +34,6 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     backgroundColor: "#F7F7F9",
-    justifyContent: "flex-start",
-    alignItems: "center",
     padding: 20,
   },
   logSpacing: {

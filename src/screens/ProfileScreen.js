@@ -8,7 +8,7 @@ import {
   Alert,
   ScrollView,
 } from "react-native";
-import Log from "./Log";
+import LogComponent from "../components/LogComponent";
 
 const ProfileScreen = ({ navigation }) => {
   // Placeholder for user data
@@ -17,35 +17,8 @@ const ProfileScreen = ({ navigation }) => {
     profilePictureUri: require("../../assets/profile-picture.jpeg"),
   };
 
-  // Function to handle sending feedback
-  const sendFeedback = () => {
-    // Logic for sending feedback
-  };
-
-  // Function to handle logging out
-  const logOut = () => {
-    // Logic for logging out
-  };
-
-  // Function to handle deactivating account
-  const deactivateAccount = () => {
-    Alert.alert(
-      "Deactivate Account",
-      "Are you sure you want to deactivate your account?",
-      [
-        { text: "Cancel", style: "cancel" },
-        // If confirmed, call a function to handle the deactivation
-        {
-          text: "Deactivate",
-          onPress: () => console.log("Deactivate account"),
-          style: "destructive",
-        },
-      ]
-    );
-  };
-
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.screen}>
       <Image
         source={userData.profilePictureUri}
         style={styles.profilePicture}
@@ -65,17 +38,20 @@ const ProfileScreen = ({ navigation }) => {
           <Text>Settings</Text>
         </TouchableOpacity>
       </View>
-    </View>
+      <View>
+        <LogComponent navigation={navigation} style={styles.logSpacing} />
+        <LogComponent navigation={navigation} style={styles.logSpacing} />
+        <LogComponent navigation={navigation} />
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {
+  screen: {
     flex: 1,
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
-    padding: 20,
     backgroundColor: "#F7F7F9",
+    padding: 20,
   },
   profilePicture: {
     width: 100,
@@ -92,6 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "flex-start",
     width: "100%",
+    marginBottom: 20,
   },
 
   button: {
@@ -103,12 +80,15 @@ const styles = StyleSheet.create({
   },
 
   firstButton: {
-    flex: 1, // This allows the button to expand
+    flex: 1,
     marginRight: 10, // Space between buttons
   },
 
   secondButton: {
     flex: 1,
+  },
+  logSpacing: {
+    marginBottom: 12, // Spacing between logs
   },
 });
 
