@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Alert,
   ScrollView,
+  SafeAreaView,
 } from "react-native";
 import LogComponent from "../components/LogComponent";
 
@@ -18,39 +19,44 @@ const ProfileScreen = ({ navigation }) => {
   };
 
   return (
-    <ScrollView style={styles.screen}>
-      <Image
-        source={userData.profilePictureUri}
-        style={styles.profilePicture}
-      />
-      <Text style={styles.name}>{userData.name}</Text>
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity
-          style={[styles.button, styles.firstButton]}
-          onPress={console.log("Edit profile")}
-        >
-          <Text>Edit profile</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.button, styles.secondButton]}
-          onPress={() => navigation.navigate("Settings")}
-        >
-          <Text>Settings</Text>
-        </TouchableOpacity>
-      </View>
-      <View>
-        <LogComponent navigation={navigation} style={styles.logSpacing} />
-        <LogComponent navigation={navigation} style={styles.logSpacing} />
-        <LogComponent navigation={navigation} />
-      </View>
-    </ScrollView>
+    <SafeAreaView style={styles.safeArea}>
+      <ScrollView style={styles.screen}>
+        <Image
+          source={userData.profilePictureUri}
+          style={styles.profilePicture}
+        />
+        <Text style={styles.name}>{userData.name}</Text>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity
+            style={[styles.button, styles.firstButton]}
+            onPress={console.log("Edit profile")}
+          >
+            <Text>Edit profile</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.button, styles.secondButton]}
+            onPress={() => navigation.navigate("Settings")}
+          >
+            <Text>Settings</Text>
+          </TouchableOpacity>
+        </View>
+        <View>
+          <LogComponent navigation={navigation} style={styles.logSpacing} />
+          <LogComponent navigation={navigation} style={styles.logSpacing} />
+          <LogComponent navigation={navigation} />
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  screen: {
+  safeArea: {
     flex: 1,
     backgroundColor: "#F7F7F9",
+  },
+  screen: {
+    flex: 1,
     padding: 20,
   },
   profilePicture: {
