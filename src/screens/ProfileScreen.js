@@ -19,6 +19,12 @@ const ProfileScreen = ({ navigation }) => {
     profilePictureUri: require("../../assets/profile-picture.jpeg"),
   };
 
+  const listData = {
+    name: "voicepal stories",
+    listeners: "10",
+    profilePictureUri: require("../../assets/wfh.png"),
+  };
+
   return (
     <SafeAreaView style={styles.safeArea}>
       <ScrollView style={styles.screen}>
@@ -42,13 +48,28 @@ const ProfileScreen = ({ navigation }) => {
             <Text style={styles.buttonText}>settings</Text>
           </TouchableOpacity>
         </View>
-        <View>
+        <View style={styles.profileSection}>
           <Text style={styles.sectionTitle}>my lists</Text>
           <TouchableOpacity
-            style={styles.button}
+            style={styles.newListButton}
             onPress={() => navigation.navigate("New List")}
           >
             <Text style={styles.buttonText}>new list</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.listComponent}
+            onPress={() => navigation.navigate("List")}
+          >
+            <Image
+              source={listData.profilePictureUri}
+              style={styles.listImage}
+            />
+            <View style={styles.listText}>
+              <Text style={styles.listTitle}>{listData.name}</Text>
+              <Text style={styles.listSubtitle}>
+                {listData.listeners} listeners
+              </Text>
+            </View>
           </TouchableOpacity>
         </View>
       </ScrollView>
@@ -93,9 +114,15 @@ const styles = StyleSheet.create({
   button: {
     padding: 12,
     alignItems: "center",
-    marginVertical: 5,
     borderRadius: 999,
     backgroundColor: "#F7F7F9",
+  },
+  newListButton: {
+    padding: 12,
+    alignItems: "center",
+    borderRadius: 999,
+    backgroundColor: "#F7F7F9",
+    marginBottom: 12,
   },
   buttonText: {
     fontWeight: "500",
@@ -107,11 +134,44 @@ const styles = StyleSheet.create({
   secondButton: {
     flex: 1,
   },
+  profilesection: {
+    marginBottom: 24,
+  },
   sectionTitle: {
     fontSize: 15,
     fontWeight: "500",
     color: "#87878e",
     marginBottom: 12,
+  },
+  listComponent: {
+    height: 72,
+    flex: 1,
+    flexDirection: "row",
+    padding: 16,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 16,
+    borderColor: "#E4E4E5",
+    borderWidth: 1,
+  },
+  listText: {
+    flex: 1,
+  },
+  listTitle: {
+    fontSize: 16,
+    lineHeight: 18,
+    fontWeight: "600",
+    marginBottom: 2,
+  },
+  listSubtitle: {
+    fontSize: 14,
+    color: "#87878e",
+  },
+  listImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 16,
+    marginRight: 12,
   },
 });
 
