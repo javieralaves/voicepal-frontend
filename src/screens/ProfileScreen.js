@@ -8,6 +8,7 @@ import {
   Alert,
   ScrollView,
   SafeAreaView,
+  StatusBar,
 } from "react-native";
 import LogComponent from "../components/LogComponent";
 
@@ -53,11 +54,13 @@ const ProfileScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F7F7F9",
+    backgroundColor: "#FFFFFF",
+    paddingTop: StatusBar.currentHeight,
   },
   screen: {
     flex: 1,
     padding: 20,
+    backgroundColor: "#FFFFFF",
   },
   profilePicture: {
     width: 100,
