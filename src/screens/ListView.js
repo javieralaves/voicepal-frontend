@@ -12,6 +12,8 @@ import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function ListView({ navigation }) {
+  const isCreator = false;
+
   const listData = {
     name: "voicepal stories",
     author: "javi alaves",
@@ -25,20 +27,41 @@ export default function ListView({ navigation }) {
   const handleMembersPress = () => console.log("View list members");
   const handleQuestionsPress = () => console.log("View unanswered questions");
   const handleSharePress = () => console.log("View share link");
+  const handleSubscriptionPress = () => console.log("Manage subscription");
 
-  const buttons = [
-    {
-      icon: "account-circle",
-      text: listData.listMembers,
-      onPress: handleMembersPress,
-    },
-    {
-      icon: "comment-question",
-      text: listData.unansweredQuestions,
-      onPress: handleQuestionsPress,
-    },
-    { icon: "share", text: "share", onPress: handleSharePress },
-  ];
+  let buttons = [];
+
+  if (isCreator) {
+    // For creators, add members and questions buttons, then share button
+    buttons = [
+      {
+        icon: "account-circle",
+        text: listData.listMembers.toString(),
+        onPress: handleMembersPress,
+      },
+      {
+        icon: "comment-question",
+        text: listData.unansweredQuestions.toString(),
+        onPress: handleQuestionsPress,
+      },
+      { icon: "share", text: "share", onPress: handleSharePress },
+    ];
+  } else {
+    // For consumers, joined button, then ask button, then share button
+    buttons = [
+      {
+        icon: "check",
+        text: "joined",
+        onPress: () => console.log(handleSubscriptionPress),
+      },
+      {
+        icon: "microphone",
+        text: "ask",
+        onPress: handleQuestionsPress,
+      },
+      { icon: "share", text: "share", onPress: handleSharePress },
+    ];
+  }
 
   const handleRecordButton = () => {
     console.log("Microphone pressed");
@@ -72,12 +95,14 @@ export default function ListView({ navigation }) {
         </View>
       </ScrollView>
       {/* don't have the record button component here so just made one in view */}
-      <TouchableOpacity
-        style={styles.microphoneButton}
-        onPress={handleRecordButton}
-      >
-        <MaterialCommunityIcons name="microphone" size={32} color="#FFFFFF" />
-      </TouchableOpacity>
+      {isCreator && (
+        <TouchableOpacity
+          style={styles.microphoneButton}
+          onPress={handleRecordButton}
+        >
+          <MaterialCommunityIcons name="microphone" size={32} color="#FFFFFF" />
+        </TouchableOpacity>
+      )}
     </SafeAreaView>
   );
 }
