@@ -44,7 +44,10 @@ const ProfileScreen = ({ navigation }) => {
         </View>
         <View>
           <Text style={styles.sectionTitle}>my lists</Text>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity
+            style={styles.button}
+            onPress={() => navigation.navigate("New List")}
+          >
             <Text style={styles.buttonText}>new list</Text>
           </TouchableOpacity>
         </View>

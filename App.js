@@ -22,6 +22,7 @@ import Log from "./src/screens/Log";
 import ProfileScreen from "./src/screens/ProfileScreen";
 import SettingsScreen from "./src/screens/SettingsScreen";
 import BottomTabNavigator from "./src/components/BottomTabNavigator";
+import NewList from "./src/screens/NewList";
 
 // authentication view
 function AuthenticationView({ navigation }) {
@@ -181,6 +182,15 @@ function App() {
             component={Log}
             options={{
               headerShown: false,
+              presentation: "modal",
+              cardStyleInterpolator: CardStyleInterpolators,
+            }}
+          />
+          <Stack.Screen
+            name="New List"
+            component={NewList}
+            options={{
+              headerShown: true,
               presentation: "modal",
               cardStyleInterpolator: CardStyleInterpolators,
             }}
