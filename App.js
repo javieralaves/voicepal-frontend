@@ -190,7 +190,7 @@ function App() {
             name="New List"
             component={NewList}
             options={{
-              headerShown: true,
+              headerShown: false,
               presentation: "modal",
               cardStyleInterpolator: CardStyleInterpolators,
             }}
