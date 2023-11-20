@@ -42,6 +42,12 @@ const ProfileScreen = ({ navigation }) => {
             <Text style={styles.buttonText}>settings</Text>
           </TouchableOpacity>
         </View>
+        <View>
+          <Text style={styles.sectionTitle}>my lists</Text>
+          <TouchableOpacity style={styles.button}>
+            <Text style={styles.buttonText}>new list</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -81,7 +87,6 @@ const styles = StyleSheet.create({
     width: "100%",
     marginBottom: 24,
   },
-
   button: {
     padding: 12,
     alignItems: "center",
@@ -96,9 +101,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginRight: 10, // Space between buttons
   },
-
   secondButton: {
     flex: 1,
+  },
+  sectionTitle: {
+    fontSize: 15,
+    fontWeight: "500",
+    color: "#87878e",
+    marginBottom: 12,
   },
 });
 
