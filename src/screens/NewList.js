@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
     height: 56,
     backgroundColor: "#F7F7F9",
     padding: 16,
-    marginBottom: 16,
+    marginBottom: 24,
     borderRadius: 12,
   },
   controlSectionTitle: {
@@ -170,7 +170,7 @@ const styles = StyleSheet.create({
     marginBottom: 6,
   },
   visibilitySection: {
-    marginBottom: 16,
+    marginBottom: 24,
   },
   tabContainer: {
     flexDirection: "row",
