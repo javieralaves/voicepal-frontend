@@ -24,6 +24,7 @@ import SettingsScreen from "./src/screens/SettingsScreen";
 import BottomTabNavigator from "./src/components/BottomTabNavigator";
 import NewList from "./src/screens/NewList";
 import ListView from "./src/screens/ListView";
+import ListListeners from "./src/screens/ListListeners";
 
 // authentication view
 function AuthenticationView({ navigation }) {
@@ -199,6 +200,15 @@ function App() {
           <Stack.Screen
             name="List"
             component={ListView}
+            options={{
+              headerShown: false,
+              presentation: "modal",
+              cardStyleInterpolator: CardStyleInterpolators,
+            }}
+          />
+          <Stack.Screen
+            name="List Listeners"
+            component={ListListeners}
             options={{
               headerShown: false,
               presentation: "modal",
