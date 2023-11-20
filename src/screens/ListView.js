@@ -50,8 +50,7 @@ export default function ListView({ navigation }) {
     // For consumers, joined button, then ask button, then share button
     buttons = [
       {
-        icon: "check",
-        text: "joined",
+        text: "leave",
         onPress: () => console.log(handleSubscriptionPress),
       },
       {
