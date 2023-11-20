@@ -10,7 +10,6 @@ import {
   SafeAreaView,
   StatusBar,
 } from "react-native";
-import LogComponent from "../components/LogComponent";
 
 const ProfileScreen = ({ navigation }) => {
   // Placeholder for user data
@@ -42,11 +41,6 @@ const ProfileScreen = ({ navigation }) => {
           >
             <Text style={styles.buttonText}>settings</Text>
           </TouchableOpacity>
-        </View>
-        <View>
-          <LogComponent navigation={navigation} style={styles.logSpacing} />
-          <LogComponent navigation={navigation} style={styles.logSpacing} />
-          <LogComponent navigation={navigation} />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -105,9 +99,6 @@ const styles = StyleSheet.create({
 
   secondButton: {
     flex: 1,
-  },
-  logSpacing: {
-    marginBottom: 12, // Spacing between logs
   },
 });
 
