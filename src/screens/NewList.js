@@ -102,7 +102,9 @@ export default function NewList({ navigation }) {
               </TouchableOpacity>
             </View>
             <Text style={styles.captionText}>
-              anyone can see this list on your profile
+              {isPublic
+                ? "anyone can see this list on your profile"
+                : "only people with the link can see this list"}
             </Text>
           </View>
         </View>
