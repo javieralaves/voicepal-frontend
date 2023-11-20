@@ -12,7 +12,7 @@ import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function ListView({ navigation }) {
-  const isCreator = false;
+  const isCreator = true;
 
   const listData = {
     name: "voicepal stories",
@@ -24,8 +24,12 @@ export default function ListView({ navigation }) {
   };
 
   // Placeholder functions for button presses
-  const handleMembersPress = () => console.log("View list members");
-  const handleQuestionsPress = () => console.log("View unanswered questions");
+  const handleMembersPress = () => {
+    navigation.navigate("List Listeners");
+  };
+  const handleQuestionsPress = () => {
+    navigation.navigate("List Questions");
+  };
   const handleSharePress = () => console.log("View share link");
   const handleSubscriptionPress = () => console.log("Manage subscription");
 
@@ -50,8 +54,7 @@ export default function ListView({ navigation }) {
     // For consumers, joined button, then ask button, then share button
     buttons = [
       {
-        icon: "check",
-        text: "joined",
+        text: "leave",
         onPress: () => console.log(handleSubscriptionPress),
       },
       {
