@@ -27,7 +27,9 @@ export default function ListView({ navigation }) {
   const handleMembersPress = () => {
     navigation.navigate("List Listeners");
   };
-  const handleQuestionsPress = () => console.log("View unanswered questions");
+  const handleQuestionsPress = () => {
+    navigation.navigate("List Questions");
+  };
   const handleSharePress = () => console.log("View share link");
   const handleSubscriptionPress = () => console.log("Manage subscription");
 
