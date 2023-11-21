@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   SafeAreaView,
   ScrollView,
@@ -10,6 +11,8 @@ import {
 } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as Clipboard from "expo-clipboard";
+import Toast, { BaseToast } from "react-native-toast-message";
 
 export default function ListView({ navigation }) {
   const isCreator = true;
@@ -23,6 +26,26 @@ export default function ListView({ navigation }) {
     unansweredQuestions: 0,
   };
 
+  const toastConfig = {
+    success: (props) => (
+      <BaseToast
+        {...props}
+        style={{
+          backgroundColor: "#242424",
+          borderRadius: 9999,
+          borderLeftColor: "#242424",
+        }}
+        contentContainerStyle={{ paddingHorizontal: 24 }}
+        text1Style={{
+          fontSize: 15,
+          fontWeight: "500",
+          color: "white",
+        }}
+      />
+    ),
+    // Add other types if needed
+  };
+
   // Placeholder functions for button presses
   const handleMembersPress = () => {
     navigation.navigate("List Listeners");
@@ -30,8 +53,20 @@ export default function ListView({ navigation }) {
   const handleQuestionsPress = () => {
     navigation.navigate("List Questions");
   };
-  const handleSharePress = () => console.log("View share link");
+  const handleSharePress = () => {
+    const shareLink = "https://voicepal.me"; // Replace with actual link
+    Clipboard.setStringAsync(shareLink);
+
+    Toast.show({
+      type: "success",
+      position: "bottom",
+      text1: "Link copied to clipboard",
+    });
+  };
   const handleSubscriptionPress = () => console.log("Manage subscription");
+  const handleListSettings = () => {
+    navigation.navigate("List Settings");
+  };
 
   let buttons = [];
 
@@ -54,8 +89,25 @@ export default function ListView({ navigation }) {
     // For consumers, joined button, then ask button, then share button
     buttons = [
       {
-        text: "leave",
-        onPress: () => console.log(handleSubscriptionPress),
+        text: "joined",
+        onPress: () => {
+          Alert.alert(
+            "Leave list",
+            "Are you sure you want to leave this list?",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel",
+              },
+              {
+                text: "Confirm",
+                onPress: () => console.log("Confirm Pressed"),
+              },
+            ],
+            { cancelable: false }
+          );
+        },
       },
       {
         icon: "microphone",
@@ -79,6 +131,18 @@ export default function ListView({ navigation }) {
           <Text style={styles.listTitle}>{listData.name}</Text>
           <Text style={styles.listCreator}>by {listData.author}</Text>
           <Text style={styles.listDescription}>{listData.description}</Text>
+          {isCreator && (
+            <TouchableOpacity
+              style={styles.listSettings}
+              onPress={handleListSettings}
+            >
+              <MaterialCommunityIcons
+                name={"pencil"}
+                size={24}
+                color={"#87878e"}
+              />
+            </TouchableOpacity>
+          )}
           <View style={styles.buttonRow}>
             {buttons.map((button, index) => (
               <TouchableOpacity
@@ -106,6 +170,7 @@ export default function ListView({ navigation }) {
           <MaterialCommunityIcons name="microphone" size={32} color="#FFFFFF" />
         </TouchableOpacity>
       )}
+      <Toast config={toastConfig} />
     </SafeAreaView>
   );
 }
@@ -144,6 +209,20 @@ const styles = StyleSheet.create({
   },
   listDescription: {
     color: "#87878e",
+  },
+  listSettings: {
+    position: "absolute",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 48,
+    height: 48,
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#E4E4E5",
+    borderRadius: 12,
+    top: 16,
+    right: 16,
   },
   buttonRow: {
     flexDirection: "row",

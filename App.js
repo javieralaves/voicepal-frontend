@@ -26,6 +26,7 @@ import NewList from "./src/screens/NewList";
 import ListView from "./src/screens/ListView";
 import ListListeners from "./src/screens/ListListeners";
 import ListQuestions from "./src/screens/ListQuestions";
+import ListSettings from "./src/screens/ListSettings";
 
 // authentication view
 function AuthenticationView({ navigation }) {
@@ -221,6 +222,15 @@ function App() {
             component={ListQuestions}
             options={{
               headerShown: false,
+              presentation: "modal",
+              cardStyleInterpolator: CardStyleInterpolators,
+            }}
+          />
+          <Stack.Screen
+            name="List Settings"
+            component={ListSettings}
+            options={{
+              headerShown: true,
               presentation: "modal",
               cardStyleInterpolator: CardStyleInterpolators,
             }}
