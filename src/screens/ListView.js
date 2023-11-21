@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import * as Clipboard from "expo-clipboard";
+import Toast, { BaseToast } from "react-native-toast-message";
 
 export default function ListView({ navigation }) {
   const isCreator = false;
@@ -24,6 +26,26 @@ export default function ListView({ navigation }) {
     unansweredQuestions: 0,
   };
 
+  const toastConfig = {
+    success: (props) => (
+      <BaseToast
+        {...props}
+        style={{
+          backgroundColor: "#242424",
+          borderRadius: 9999,
+          borderLeftColor: "#242424",
+        }}
+        contentContainerStyle={{ paddingHorizontal: 24 }}
+        text1Style={{
+          fontSize: 15,
+          fontWeight: "500",
+          color: "white",
+        }}
+      />
+    ),
+    // Add other types if needed
+  };
+
   // Placeholder functions for button presses
   const handleMembersPress = () => {
     navigation.navigate("List Listeners");
@@ -31,7 +53,16 @@ export default function ListView({ navigation }) {
   const handleQuestionsPress = () => {
     navigation.navigate("List Questions");
   };
-  const handleSharePress = () => console.log("View share link");
+  const handleSharePress = () => {
+    const shareLink = "https://voicepal.me"; // Replace with actual link
+    Clipboard.setStringAsync(shareLink);
+
+    Toast.show({
+      type: "success",
+      position: "bottom",
+      text1: "Link copied to clipboard",
+    });
+  };
   const handleSubscriptionPress = () => console.log("Manage subscription");
 
   let buttons = [];
@@ -124,6 +155,7 @@ export default function ListView({ navigation }) {
           <MaterialCommunityIcons name="microphone" size={32} color="#FFFFFF" />
         </TouchableOpacity>
       )}
+      <Toast config={toastConfig} />
     </SafeAreaView>
   );
 }
