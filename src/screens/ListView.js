@@ -1,4 +1,5 @@
 import {
+  Alert,
   Image,
   SafeAreaView,
   ScrollView,
@@ -12,7 +13,7 @@ import React from "react";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function ListView({ navigation }) {
-  const isCreator = true;
+  const isCreator = false;
 
   const listData = {
     name: "voicepal stories",
@@ -54,8 +55,25 @@ export default function ListView({ navigation }) {
     // For consumers, joined button, then ask button, then share button
     buttons = [
       {
-        text: "leave",
-        onPress: () => console.log(handleSubscriptionPress),
+        text: "joined",
+        onPress: () => {
+          Alert.alert(
+            "Leave list",
+            "Are you sure you want to leave this list?",
+            [
+              {
+                text: "Cancel",
+                onPress: () => console.log("Cancel Pressed"),
+                style: "cancel",
+              },
+              {
+                text: "Confirm",
+                onPress: () => console.log("Confirm Pressed"),
+              },
+            ],
+            { cancelable: false }
+          );
+        },
       },
       {
         icon: "microphone",
