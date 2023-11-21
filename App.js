@@ -231,6 +231,7 @@ function App() {
             component={ListSettings}
             options={{
               headerShown: true,
+              presentation: "modal",
               cardStyleInterpolator: CardStyleInterpolators,
             }}
           />

@@ -15,7 +15,7 @@ import * as Clipboard from "expo-clipboard";
 import Toast, { BaseToast } from "react-native-toast-message";
 
 export default function ListView({ navigation }) {
-  const isCreator = false;
+  const isCreator = true;
 
   const listData = {
     name: "voicepal stories",
@@ -64,6 +64,9 @@ export default function ListView({ navigation }) {
     });
   };
   const handleSubscriptionPress = () => console.log("Manage subscription");
+  const handleListSettings = () => {
+    navigation.navigate("List Settings");
+  };
 
   let buttons = [];
 
@@ -128,6 +131,18 @@ export default function ListView({ navigation }) {
           <Text style={styles.listTitle}>{listData.name}</Text>
           <Text style={styles.listCreator}>by {listData.author}</Text>
           <Text style={styles.listDescription}>{listData.description}</Text>
+          {isCreator && (
+            <TouchableOpacity
+              style={styles.listSettings}
+              onPress={handleListSettings}
+            >
+              <MaterialCommunityIcons
+                name={"pencil"}
+                size={24}
+                color={"#87878e"}
+              />
+            </TouchableOpacity>
+          )}
           <View style={styles.buttonRow}>
             {buttons.map((button, index) => (
               <TouchableOpacity
@@ -194,6 +209,20 @@ const styles = StyleSheet.create({
   },
   listDescription: {
     color: "#87878e",
+  },
+  listSettings: {
+    position: "absolute",
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: 48,
+    height: 48,
+    backgroundColor: "#fff",
+    borderWidth: 1,
+    borderColor: "#E4E4E5",
+    borderRadius: 12,
+    top: 16,
+    right: 16,
   },
   buttonRow: {
     flexDirection: "row",
